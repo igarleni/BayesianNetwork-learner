@@ -21,6 +21,7 @@ plot(bn.hc.k2)
 bn.hc.bde <- hc(emergency, score = "bde")
 modelstring(bn.hc.bde)
 plot(bn.hc.bde)
+score(bn.hc.bde, emergency, type = "bde", iss = 1)
 
 #################################
 # Bayesian network using independece test
@@ -28,8 +29,9 @@ plot(bn.hc.bde)
 #Max-min parents and children (MMPC)
 bn.mmpc <- mmpc(emergency)
 
-#Pearson's X2 test
-ci.test("tipofinancia", "motivo_alta", "dia", data = emergency)$p.value
+#Mutual information test test
+ci.test("tipofinancia", "motivo_alta", "dia", data = emergency, test = "mi")$p.value
+ci.test("tipofinancia", "motivo_alta", "dia", data = emergency, test = "mc-x2")$p.value
 
 
 ###############
